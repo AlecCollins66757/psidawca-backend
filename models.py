@@ -41,3 +41,23 @@ SQLALCHEMY_DATABASE_URL = "postgresql://user:password@localhost/psidawca"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+from sqlalchemy import Column, Integer, String, Float, Date
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
+
+class Dog(Base):
+    __tablename__ = "dogs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    chip_number = Column(String, unique=True, nullable=False)
+    breed = Column(String, nullable=False)
+    blood_type = Column(String, nullable=False)
+    weight = Column(Float, nullable=False)
+    birth_date = Column(Date, nullable=False)
+    last_vaccination = Column(Date, nullable=False)
+    city = Column(String, nullable=False)
+    region = Column(String, nullable=False)
+
