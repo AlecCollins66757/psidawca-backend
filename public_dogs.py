@@ -1,40 +1,39 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Form, Depends
 from sqlalchemy.orm import Session
-from typing import List, Optional
-
-from database import SessionLocal
-from models import Dog
+from models import Dog, get_db
 
 router = APIRouter()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-@router.get("/dogs", response_model=List[dict])
-def get_public_dogs(
-    region: Optional[str] = None, city: Optional[str] = None, blood_type: Optional[str] = None,
+@router.post("/dogs/add")
+def add_dog(
+    name: str = Form(...),
+    chip_number: str = Form(...),
+    breed: str = Form(...),
+    blood_type: str = Form(...),
+    weight: float = Form(...),
+    birth_date: str = Form(...),
+    last_vaccination: str = Form(...),
+    city: str = Form(...),
+    region: str = Form(...),
     db: Session = Depends(get_db)
 ):
-    query = db.query(Dog).filter(Dog.is_active == True)
+    """
+    Endpoint do dodawania psa do bazy.
+    """
+    new_dog = Dog(
+        name=name,
+        chip_number=chip_number,
+        breed=breed,
+        blood_type=blood_type,
+        weight=weight,
+        birth_date=birth_date,
+        last_vaccination=last_vaccination,
+        city=city,
+        region=region
+    )
     
-    if region:
-        query = query.filter(Dog.region == region)
-    if city:
-        query = query.filter(Dog.city == city)
-    if blood_type:
-        query = query.filter(Dog.blood_type == blood_type)
+    db.add(new_dog)
+    db.commit()
+    db.refresh(new_dog)
     
-    dogs = query.all()
-    return [
-        {
-            "id": dog.id,
-            "name": dog.name,
-            "region": dog.region,
-            "city": dog.city,
-            "blood_type": dog.blood_type
-        } for dog in dogs
-    ]
+    return {"message": "Pies został dodany do bazy!", "dog_id": new_dog.id}
