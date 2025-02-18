@@ -32,7 +32,6 @@
                 <label for="breed">Rasa:</label>
                 <select id="breed" name="breed" class="select2" required>
                     <option value="">-- Wybierz rasę --</option>
-                    <!-- Pełna lista ras psów -->
                     <option value="Australian Cattle Dog">Australian Cattle Dog</option>
 <option value="Australian Stumpy Tail Cattle Dog">Australian Stumpy Tail Cattle Dog</option>
 <option value="Bearded Collie">Bearded Collie</option>
@@ -455,7 +454,7 @@
 <option value="Greyhound">Greyhound</option>
 <option value="Whippet">Whippet</option>
 <option value="Wilczarz irlandzki">Wilczarz irlandzki</option>
-                    <!-- Tu dodaj całą listę ras -->
+              
                 </select>
 
                 <label for="blood_type">Grupa krwi:</label>
@@ -475,6 +474,39 @@
                     <option value="DEA 6-">DEA 6-</option>
                     <option value="DEA 7+">DEA 7+</option>
                     <option value="DEA 7-">DEA 7-</option>
+                </select>
+
+                <label for="weight">Waga (kg):</label>
+                <input type="number" id="weight" name="weight" step="0.1" required>
+
+                <label for="birth_date">Data urodzenia:</label>
+                <input type="date" id="birth_date" name="birth_date" required>
+
+                <label for="last_vaccination">Data ostatniego szczepienia:</label>
+                <input type="date" id="last_vaccination" name="last_vaccination" required>
+
+                <label for="city">Miejscowość:</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="region">Województwo:</label>
+                <select id="region" name="region" class="select2" required>
+                    <option value="">-- Wybierz województwo --</option>
+                    <option value="dolnośląskie">dolnośląskie</option>
+                    <option value="kujawsko-pomorskie">kujawsko-pomorskie</option>
+                    <option value="lubelskie">lubelskie</option>
+                    <option value="lubuskie">lubuskie</option>
+                    <option value="łódzkie">łódzkie</option>
+                    <option value="małopolskie">małopolskie</option>
+                    <option value="mazowieckie">mazowieckie</option>
+                    <option value="opolskie">opolskie</option>
+                    <option value="podkarpackie">podkarpackie</option>
+                    <option value="podlaskie">podlaskie</option>
+                    <option value="pomorskie">pomorskie</option>
+                    <option value="śląskie">śląskie</option>
+                    <option value="świętokrzyskie">świętokrzyskie</option>
+                    <option value="warmińsko-mazurskie">warmińsko-mazurskie</option>
+                    <option value="wielkopolskie">wielkopolskie</option>
+                    <option value="zachodniopomorskie">zachodniopomorskie</option>
                 </select>
 
                 <button type="submit">Zarejestruj psa</button>
