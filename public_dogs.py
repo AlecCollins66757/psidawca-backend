@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Form, Depends, Request
 from sqlalchemy.orm import Session
-from models import Dog,
+from models import Dog
 from fastapi.templating import Jinja2Templates
 from database import get_db  # Importujemy get_db z database.py
 
