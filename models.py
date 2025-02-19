@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, Date, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from database import Base
-from sqlalchemy import Column, Integer, String, Float, Date
 from sqlalchemy.orm import declarative_base, sessionmaker
 from database import Base  # Upewnij się, że to jest poprawnie importowane!
 class User(Base):
