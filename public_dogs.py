@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from models import Dog
 from fastapi.templating import Jinja2Templates
 from database import get_db  # Importujemy get_db z database.py
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -11,7 +12,7 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/dogs")
 def get_dogs(db: Session = Depends(get_db)):
     dogs = db.query(Dog).all()
-    return dogs
+    return JSONResponse(content=[dog.__dict__ for dog in dogs], media_type="application/json; charset=utf-8")
     
 @router.post("/dogs/add")
 async def add_dog(
