@@ -8,6 +8,11 @@ router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
 
+@router.get("/dogs")
+def get_dogs(db: Session = Depends(get_db)):
+    dogs = db.query(Dog).all()
+    return dogs
+    
 @router.post("/dogs/add")
 async def add_dog(
     request: Request,
