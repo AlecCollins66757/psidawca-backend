@@ -22,6 +22,9 @@
     <main>
         <section>
             <h2>Dodaj psa do bazy</h2>
+            {% if message %}
+    <p style="color: green;">{{ message }}</p>
+{% endif %}
             <form action="/dogs/add" method="POST">
                 <label for="name">Imię psa:</label>
                 <input type="text" id="name" name="name" required>
