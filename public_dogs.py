@@ -1,11 +1,15 @@
-from fastapi import APIRouter, Form, Depends
+from fastapi import APIRouter, Form, Depends, Request
 from sqlalchemy.orm import Session
 from models import Dog, get_db
+from fastapi.templating import Jinja2Templates
 
 router = APIRouter()
 
+templates = Jinja2Templates(directory="templates")
+
 @router.post("/dogs/add")
-def add_dog(
+async def add_dog(
+    request: Request,
     name: str = Form(...),
     chip_number: str = Form(...),
     breed: str = Form(...),
@@ -36,4 +40,7 @@ def add_dog(
     db.commit()
     db.refresh(new_dog)
     
-    return {"message": "Pies został dodany do bazy!", "dog_id": new_dog.id}
+    return templates.TemplateResponse(
+        "register_dog.html", 
+        {"request": request, "message": "Pies został dodany do bazy!"}
+    )
