@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from public_dogs import router as dogs_router
 app = FastAPI()
 
 @app.get("/")
@@ -9,7 +9,8 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
+app.include_router(dogs_router)
+
 
 # Montowanie plików statycznych (CSS, JS)
 app.mount("/static", StaticFiles(directory="static"), name="static")
